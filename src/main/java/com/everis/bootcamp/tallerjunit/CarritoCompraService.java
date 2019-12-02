@@ -5,6 +5,7 @@ import java.util.List;
 
 public class CarritoCompraService {
 	
+	BaseDeDatosService bbdd = new BaseDeDatosService();
 	List<Articulo> articulos = new ArrayList<Articulo>();
 	
 	public void limpiarCesta(){
@@ -38,6 +39,18 @@ public class CarritoCompraService {
 		this.articulos = articulos;
 	}
 	
+	public Double getMedia() {
+		//Operadir ternario java.
+		return (articulos.size() > 0) ? totalPrice()/articulos.size() : null;
+		
+	}
 	
+	public Double aplicarDescuento(int id, Double descuento) {
+		return calculadorDescuento(bbdd.findArticulosById(id).getPrecio(), descuento);
+	}
+	
+	public void setDDBB(BaseDeDatosService ddbb) {
+		this.bbdd = ddbb;
+	}
 
 }
